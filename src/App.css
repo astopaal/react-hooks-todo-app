@@ -27,3 +27,19 @@
   margin-left:6.5%;
   color:white;
 }
+
+.editButton {
+
+  border-radius: 10;
+  color: white;
+  margin-left: 6.5%;
+  margin-right:3%;
+  width: 15%;
+  height: 40px;
+}
+
+.listItem {
+  border: solid 3px white;
+  padding:5px;
+  border-radius: 8px;
+}

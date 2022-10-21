@@ -10,17 +10,23 @@ import {
   List,
   ListItem,
   ListIcon,
+  Badge,
 } from "@chakra-ui/react";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState({ id: 1, text: "Learn React" });
   return (
     <ChakraProvider>
       <div className="mainProvider">
         <Input
-          value={todo}
-          onChange={e => setTodo(e.target.value)}
+          value={todo.text}
+          onChange={(e) =>
+            setTodo({
+              id: todos.length + 1,
+              text: e.target.value,
+            })
+          }
           className="input"
           variant="outline"
           htmlSize={50}
@@ -28,11 +34,10 @@ function App() {
           placeholder="enter something to do..."
         />
 
-        <div className="buttonGroup">
-          
+        <div className="buttonGroup" key={todo.id}>
           <Button
             onClick={() => {
-              setTodos([...todos, todo]);
+              setTodos([todo, todos]);
             }}
             className="buttons"
             colorScheme="green"
@@ -52,7 +57,6 @@ function App() {
         <List
           spacing={3}
           style={{
-            display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
@@ -60,20 +64,20 @@ function App() {
             padding: "15px",
           }}
         >
-          {todos.map(todo => (
-          <ListItem textColor="white">
-            <ListIcon color="green.500" />
-            {todo}
-          </ListItem>
+          {todos.map((todo) => (
+            <ListItem textColor="white" key={todo.id} className="listItem">
+              <Button
+                className="editButton"
+                colorScheme="yellow"
+                border="solid"
+                borderColor="white"
+                borderWidth={1}
+              >
+                Edit
+              </Button>
+              {todo.text}
+            </ListItem>
           ))}
-          <ListItem textColor="white">
-            <ListIcon color="green.500" />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit
-          </ListItem>
-          <ListItem textColor="white">
-            <ListIcon color="green.500" />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit
-          </ListItem>
         </List>
       </div>
     </ChakraProvider>
